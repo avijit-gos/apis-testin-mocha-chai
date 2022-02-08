@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha ./server/Test/Tasks.test.js --timeout 10000",
     "start": "node app.js",
     "server": "nodemon app.js"
   },
@@ -14,10 +14,13 @@
     "nodemon": "^2.0.15"
   },
   "dependencies": {
+    "chai": "^4.3.6",
+    "chai-http": "^4.3.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.0",
     "express": "^4.17.2",
     "joi": "^17.6.0",
+    "mocha": "^9.2.0",
     "mongoose": "^6.2.1",
     "morgan": "^1.10.0"
   }
