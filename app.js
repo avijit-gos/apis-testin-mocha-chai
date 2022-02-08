@@ -23,3 +23,5 @@ app.use((req, res, next) => {
 
 const port = process.env.PORT || 4000;
 app.listen(port, () => console.log(`App listening at port:${port}`));
+
+module.exports = app;

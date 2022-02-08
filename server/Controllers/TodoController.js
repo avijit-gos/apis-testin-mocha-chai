@@ -15,19 +15,29 @@ class TodoController {
       return res.status(422).json(validate.error);
     } else {
       const { title, description } = req.body;
-      const newTodo = Todo({
-        _id: new mongoose.Types.ObjectId(),
-        title: title,
-        description: description,
+      Todo.findOne({ title }, (err, todo) => {
+        if (err) {
+          return res.status(400).json({ msg: err.message });
+        } else {
+          if (todo) {
+            return res.status(400).json({ msg: "Task already exists" });
+          } else {
+            const newTodo = Todo({
+              _id: new mongoose.Types.ObjectId(),
+              title: title,
+              description: description,
+            });
+            newTodo
+              .save()
+              .then((result) => {
+                res.status(201).json({ msg: "New Task save", result });
+              })
+              .catch((err) => {
+                res.status(400).json({ msg: err.message });
+              });
+          }
+        }
       });
-      newTodo
-        .save()
-        .then((result) => {
-          res.status(201).json({ msg: "New Task save" });
-        })
-        .catch((err) => {
-          res.status(400).json({ msg: err.message });
-        });
     }
   }
 
